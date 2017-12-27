@@ -20,7 +20,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -54,7 +53,6 @@ public class EventSQLiteOpenHelperTest {
         context.deleteDatabase(String.format(EventSQLiteOpenHelper.DB_NAME, "1"));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Test
     public void onCreateMakesTables() {
         EventSQLiteOpenHelper eventSQLiteOpenHelper =

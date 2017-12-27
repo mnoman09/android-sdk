@@ -25,7 +25,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+//import android.support.annotation.RequiresApi;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
@@ -64,7 +64,6 @@ public class ServiceSchedulerTest {
     private ServiceScheduler serviceScheduler;
     private Context context;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Before
     public void setup() {
         context      = mock(Context.class);

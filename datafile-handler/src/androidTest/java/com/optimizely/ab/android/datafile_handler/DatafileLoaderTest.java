@@ -18,7 +18,7 @@ package com.optimizely.ab.android.datafile_handler;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+//import android.support.annotation.RequiresApi;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.core.deps.guava.util.concurrent.ListeningExecutorService;
 import android.support.test.espresso.core.deps.guava.util.concurrent.MoreExecutors;
@@ -53,7 +53,6 @@ import static org.mockito.Mockito.when;
 /**
  * Tests for {@link DatafileLoader}
  */
-@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
 @RunWith(AndroidJUnit4.class)
 public class DatafileLoaderTest {
 

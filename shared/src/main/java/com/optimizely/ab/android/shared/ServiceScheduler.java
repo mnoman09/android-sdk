@@ -27,7 +27,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
+//import android.support.annotation.RequiresApi;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -281,7 +281,7 @@ public class ServiceScheduler {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    //@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private static boolean isScheduled(Context context, Integer jobId) {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             JobScheduler jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);

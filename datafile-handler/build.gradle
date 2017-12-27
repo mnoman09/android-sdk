@@ -33,6 +33,9 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         consumerProguardFiles '../proguard-rules.txt'
     }
+    lintOptions {
+        abortOnError false
+    }
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -49,6 +52,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+    buildToolsVersion '26.0.2'
 }
 
 dependencies {

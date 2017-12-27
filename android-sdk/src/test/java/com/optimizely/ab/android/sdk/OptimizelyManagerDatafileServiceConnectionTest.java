@@ -18,7 +18,6 @@ package com.optimizely.ab.android.sdk;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,7 +53,7 @@ public class OptimizelyManagerDatafileServiceConnectionTest {
         datafileServiceConnection = new DatafileServiceConnection(optimizelyManager.getProjectId(), context, optimizelyManager.getDatafileLoadedListener(context,null));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+    //@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Test
     public void onServiceConnected() {
         DatafileService.LocalBinder binder = mock(DatafileService.LocalBinder.class);
@@ -70,7 +69,6 @@ public class OptimizelyManagerDatafileServiceConnectionTest {
         verify(service).getDatafile(same("1"), any(DatafileLoader.class), any(DatafileLoadedListener.class));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Test
     public void onServiceConnectedNullServiceFromBinder() {
         DatafileService.LocalBinder binder = mock(DatafileService.LocalBinder.class);

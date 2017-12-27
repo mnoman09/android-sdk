@@ -19,8 +19,10 @@ package com.optimizely.ab.android.test_app;
 import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
+import android.support.test.espresso.IdlingPolicies;
 import android.support.test.espresso.idling.CountingIdlingResource;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
@@ -48,6 +50,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -57,8 +60,8 @@ import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 
-@RunWith(AndroidJUnit4.class)
 @LargeTest
+@RunWith(AndroidJUnit4.class)
 public class MainActivityEspressoTest {
 
     private Context context = InstrumentationRegistry.getTargetContext();
@@ -165,6 +168,8 @@ public class MainActivityEspressoTest {
         // Check that the text was changed.
         // These tests are pointed at a real project.
         // The user 'test_user` is in the whitelist for variation_a for experiment background_experiment
+        IdlingPolicies.setMasterPolicyTimeout(3, TimeUnit.MINUTES);
+        IdlingPolicies.setIdlingResourceTimeout(3, TimeUnit.MINUTES);
         onView(withId(R.id.tv_variation_a_text_1))
                 .check(matches(isDisplayed()));
 

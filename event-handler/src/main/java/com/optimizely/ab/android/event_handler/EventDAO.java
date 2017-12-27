@@ -21,7 +21,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.util.Pair;
 
 import org.slf4j.Logger;
@@ -60,7 +59,6 @@ class EventDAO {
      * @param logger where to log errors and warnings.
      * @return a new instance of EventDAO.
      */
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     static EventDAO getInstance(@NonNull Context context, @NonNull String projectId, @NonNull Logger logger) {
         EventSQLiteOpenHelper sqLiteOpenHelper = new EventSQLiteOpenHelper(context, projectId, null, EventSQLiteOpenHelper.VERSION, LoggerFactory.getLogger(EventSQLiteOpenHelper.class));
         return new EventDAO(sqLiteOpenHelper, logger);
