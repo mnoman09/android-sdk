@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 
 import com.optimizely.ab.android.shared.Client;
 import com.optimizely.ab.android.shared.OptlyStorage;
@@ -57,7 +56,6 @@ public class EventIntentService extends IntentService {
      * Create the event dispatcher {@link EventDispatcher}
      * @see IntentService#onCreate()
      */
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onCreate() {
         super.onCreate();

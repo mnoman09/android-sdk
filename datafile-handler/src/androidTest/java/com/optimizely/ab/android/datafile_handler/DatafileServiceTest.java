@@ -21,7 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
-import android.support.annotation.RequiresApi;
+//import android.support.annotation.RequiresApi;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.core.deps.guava.util.concurrent.ListeningExecutorService;
 import android.support.test.espresso.core.deps.guava.util.concurrent.MoreExecutors;
@@ -69,7 +69,7 @@ public class DatafileServiceTest {
         executor = MoreExecutors.newDirectExecutorService();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+    //@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Test
     public void testBinding() throws TimeoutException {
         Context context = InstrumentationRegistry.getTargetContext();
@@ -96,7 +96,7 @@ public class DatafileServiceTest {
         assertTrue(datafileService.isBound());
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+    //@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Test
     public void testValidStart() throws TimeoutException {
         Context context = InstrumentationRegistry.getTargetContext();
@@ -116,7 +116,7 @@ public class DatafileServiceTest {
         assertEquals(val, START_FLAG_REDELIVERY);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+    //@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Test
     public void testNullIntentStart() throws TimeoutException {
         Context context = InstrumentationRegistry.getTargetContext();
@@ -135,7 +135,7 @@ public class DatafileServiceTest {
         verify(logger).warn("Data file service received a null intent");
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+    //@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Test
     public void testNoProjectIdIntentStart() throws TimeoutException {
         Context context = InstrumentationRegistry.getTargetContext();
@@ -154,7 +154,7 @@ public class DatafileServiceTest {
         verify(logger).warn("Data file service received an intent with no project id extra");
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+    //@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Test
     public void testUnbind() throws TimeoutException {
         Context context = InstrumentationRegistry.getTargetContext();
@@ -174,7 +174,7 @@ public class DatafileServiceTest {
         verify(logger).info("All clients are unbound from data file service");
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+    //@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Test
     @Ignore
     public void testIntentExtraData(){
@@ -203,7 +203,7 @@ public class DatafileServiceTest {
         assertTrue(intent2.getComponent().getShortClassName().contains("DatafileService"));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+    //@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Test
     public void testGetDatafileUrl(){
         // HARD-CODING link here to make sure we don't unintentionally mess up the datafile version

@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.core.deps.guava.util.concurrent.ListeningExecutorService;
 import android.support.test.espresso.core.deps.guava.util.concurrent.MoreExecutors;
@@ -255,7 +254,7 @@ public class OptimizelyManagerTest {
         assertNull(optimizelyManager.getOptimizelyStartListener());
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+    //@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Test
     public void injectOptimizely() {
         Context context = mock(Context.class);
@@ -275,7 +274,7 @@ public class OptimizelyManagerTest {
     }
 
     @Test
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    //@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void injectOptimizelyNullListener() {
         Context context = mock(Context.class);
         PackageManager packageManager = mock(PackageManager.class);
@@ -319,7 +318,7 @@ public class OptimizelyManagerTest {
         assertEquals(optimizelyManager.getProjectId(), intent2.getStringExtra(DatafileService.EXTRA_PROJECT_ID));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+    //@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Test
     public void injectOptimizelyHandlesInvalidDatafile() {
         Context context = mock(Context.class);
@@ -350,7 +349,7 @@ public class OptimizelyManagerTest {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+    //@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Test
     public void injectOptimizelyDoesNotDuplicateCallback() {
         Context context = mock(Context.class);

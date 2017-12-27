@@ -20,7 +20,6 @@ import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.optimizely.ab.event.internal.payload.Event;
@@ -34,7 +33,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class)
 public class OptimizelyClientEngineTest {
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB_MR2)
+    //@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB_MR2)
     @Test
     public void testGetClientEngineFromContextAndroidTV() {
         Context context = mock(Context.class);
@@ -44,7 +43,7 @@ public class OptimizelyClientEngineTest {
         assertEquals(Event.ClientEngine.ANDROID_TV_SDK, OptimizelyClientEngine.getClientEngineFromContext(context));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB_MR2)
+    //@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB_MR2)
     @Test
     public void testGetClientEngineFromContextAndroid() {
         Context context = mock(Context.class);

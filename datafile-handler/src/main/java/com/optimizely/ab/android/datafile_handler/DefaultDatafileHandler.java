@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 
 import com.optimizely.ab.android.shared.Cache;
 import com.optimizely.ab.android.shared.Client;
@@ -70,7 +69,6 @@ public class DefaultDatafileHandler implements DatafileHandler {
         if (datafileServiceConnection == null) {
             this.datafileServiceConnection = new DatafileServiceConnection(projectId, context.getApplicationContext(),
                     new DatafileLoadedListener() {
-                        @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
                         @Override
                         public void onDatafileLoaded(@Nullable String dataFile) {
                             if (listener != null) {

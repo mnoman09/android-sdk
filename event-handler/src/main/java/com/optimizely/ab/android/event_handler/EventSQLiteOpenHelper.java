@@ -22,7 +22,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
+//import android.support.annotation.RequiresApi;
 
 import org.slf4j.Logger;
 
@@ -48,7 +48,7 @@ class EventSQLiteOpenHelper extends SQLiteOpenHelper {
     @NonNull private final String projectId;
     @NonNull private final Context context;
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+   // @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     EventSQLiteOpenHelper(@NonNull Context context, @NonNull String projectId, @Nullable SQLiteDatabase.CursorFactory factory, int version, @NonNull Logger logger) {
         super(context, String.format(DB_NAME, projectId), factory, version);
         this.logger = logger;

@@ -21,7 +21,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -58,7 +57,6 @@ public class DatafileLoader {
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     public void getDatafile(@NonNull String datafileUrl, @Nullable DatafileLoadedListener datafileLoadedListener) {
         RequestDatafileFromClientTask requestDatafileFromClientTask =
                 new RequestDatafileFromClientTask(datafileUrl,

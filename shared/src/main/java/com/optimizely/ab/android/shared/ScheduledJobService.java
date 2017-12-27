@@ -27,7 +27,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.PersistableBundle;
-import android.support.annotation.RequiresApi;
+//import android.support.annotation.RequiresApi;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +40,7 @@ import java.lang.reflect.Method;
  */
 
 //BEGIN_INCLUDE(service)
-@RequiresApi(api = Build.VERSION_CODES.O)
+//@RequiresApi(api = Build.VERSION_CODES.O)
 public class ScheduledJobService extends JobService {
     public static final String INTENT_EXTRA_COMPONENT_NAME = "com.optimizely.ab.android.shared.JobService.ComponentName";
     public static final int ONE_MINUTE = 60 * 1000;

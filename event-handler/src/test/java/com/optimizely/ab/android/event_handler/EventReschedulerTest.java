@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 
 import com.optimizely.ab.android.shared.ServiceScheduler;
 
@@ -80,7 +79,6 @@ public class EventReschedulerTest {
         verify(logger).info("Rescheduling event flushing if necessary");
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB_MR1)
     @Test
     public void onReceiveValidPackageReplaced() {
         when(intent.getAction()).thenReturn(Intent.ACTION_MY_PACKAGE_REPLACED);

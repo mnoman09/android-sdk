@@ -22,7 +22,6 @@ import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 
 import com.optimizely.ab.android.shared.Cache;
 import com.optimizely.ab.android.shared.Client;
@@ -61,7 +60,6 @@ public class DatafileServiceConnection implements ServiceConnection {
      *
      * @see ServiceConnection#onServiceConnected(ComponentName, IBinder)
      */
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onServiceConnected(ComponentName className,
                                    IBinder service) {
