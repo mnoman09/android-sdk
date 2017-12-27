@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
+import android.support.test.espresso.IdlingPolicies;
 import android.support.test.espresso.idling.CountingIdlingResource;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
@@ -167,6 +168,8 @@ public class MainActivityEspressoTest {
         // Check that the text was changed.
         // These tests are pointed at a real project.
         // The user 'test_user` is in the whitelist for variation_a for experiment background_experiment
+        IdlingPolicies.setMasterPolicyTimeout(3, TimeUnit.MINUTES);
+        IdlingPolicies.setIdlingResourceTimeout(3, TimeUnit.MINUTES);
         onView(withId(R.id.tv_variation_a_text_1))
                 .check(matches(isDisplayed()));
 
