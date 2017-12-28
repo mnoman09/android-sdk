@@ -17,11 +17,13 @@
 package com.optimizely.ab.android.datafile_handler;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 
 import com.optimizely.ab.android.shared.Cache;
@@ -45,6 +47,7 @@ public class DatafileService extends Service {
     public static final String EXTRA_PROJECT_ID = "com.optimizely.ab.android.EXTRA_PROJECT_ID";
     public static final String FORMAT_VERSIONED_CDN_URL = "https://cdn.optimizely.com/public/%s/datafile_v%s.json";
     static final String DATAFILE_VERSION = "3";
+    public static final Integer JOB_ID = 2113;
 
     @NonNull private final IBinder binder = new LocalBinder();
     Logger logger = LoggerFactory.getLogger(DatafileService.class);
@@ -61,11 +64,11 @@ public class DatafileService extends Service {
             if (intent.hasExtra(EXTRA_PROJECT_ID)) {
                 String projectId = intent.getStringExtra(EXTRA_PROJECT_ID);
                 DatafileClient datafileClient = new DatafileClient(
-                        new Client(new OptlyStorage(getApplicationContext()), LoggerFactory.getLogger(OptlyStorage.class)),
+                        new Client(new OptlyStorage(this.getApplicationContext()), LoggerFactory.getLogger(OptlyStorage.class)),
                         LoggerFactory.getLogger(DatafileClient.class));
                 DatafileCache datafileCache = new DatafileCache(
                         projectId,
-                        new Cache(getApplicationContext(), LoggerFactory.getLogger(Cache.class)),
+                        new Cache(this.getApplicationContext(), LoggerFactory.getLogger(Cache.class)),
                         LoggerFactory.getLogger(DatafileCache.class));
 
                 String datafileUrl = getDatafileUrl(projectId);
@@ -77,6 +80,7 @@ public class DatafileService extends Service {
         } else {
             logger.warn("Data file service received a null intent");
         }
+
         return super.onStartCommand(intent, flags, startId);
     }
 

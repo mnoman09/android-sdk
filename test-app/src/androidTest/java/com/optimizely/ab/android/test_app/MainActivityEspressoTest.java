@@ -30,6 +30,7 @@ import android.view.WindowManager;
 
 import com.optimizely.ab.android.datafile_handler.DatafileService;
 import com.optimizely.ab.android.event_handler.EventIntentService;
+import com.optimizely.ab.android.shared.CountingIdlingResourceInterface;
 import com.optimizely.ab.android.shared.CountingIdlingResourceManager;
 import com.optimizely.ab.android.shared.ServiceScheduler;
 import com.optimizely.ab.bucketing.UserProfileService;
@@ -71,7 +72,19 @@ public class MainActivityEspressoTest {
                 @Override
                 protected void before() throws Throwable {
                     super.before();
-                    countingIdlingResource = CountingIdlingResourceManager.getIdlingResource();
+                    countingIdlingResource = new CountingIdlingResource("optly", true);
+                    CountingIdlingResourceInterface wrapper = new CountingIdlingResourceInterface() {
+                        @Override
+                        public void increment() {
+                            countingIdlingResource.increment();
+                        }
+
+                        @Override
+                        public void decrement() {
+                            countingIdlingResource.decrement();
+                        }
+                    };
+                    CountingIdlingResourceManager.setIdlingResource(wrapper);
                     // To prove that the test fails, omit this call:
                     Espresso.registerIdlingResources(countingIdlingResource);
                 }
@@ -114,7 +127,7 @@ public class MainActivityEspressoTest {
                     Context applicationContext = context.getApplicationContext();
                     ServiceScheduler.PendingIntentFactory pendingIntentFactory = new ServiceScheduler.PendingIntentFactory(applicationContext);
                     AlarmManager alarmManager = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
-                    serviceScheduler = new ServiceScheduler(alarmManager, pendingIntentFactory, LoggerFactory.getLogger(ServiceScheduler.class));
+                    serviceScheduler = new ServiceScheduler(applicationContext, pendingIntentFactory, LoggerFactory.getLogger(ServiceScheduler.class));
                 }
 
                 @Override

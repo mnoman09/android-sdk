@@ -16,7 +16,6 @@
 
 package com.optimizely.ab.android.datafile_handler;
 
-import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -36,9 +35,7 @@ import org.slf4j.LoggerFactory;
  * interaction point to the datafile-handler module.
  */
 public class DefaultDatafileHandler implements DatafileHandler {
-
     private DatafileServiceConnection datafileServiceConnection;
-
     /**
      * Synchronous call to download the datafile.
      * Gets the file on the current thread from the Optimizely CDN.
@@ -108,16 +105,26 @@ public class DefaultDatafileHandler implements DatafileHandler {
     public void startBackgroundUpdates(Context context, String projectId, Long updateInterval) {
         enableBackgroundCache(context, projectId);
 
-        AlarmManager alarmManager = (AlarmManager) context
-                .getSystemService(Context.ALARM_SERVICE);
         ServiceScheduler.PendingIntentFactory pendingIntentFactory = new ServiceScheduler
                 .PendingIntentFactory(context.getApplicationContext());
-        ServiceScheduler serviceScheduler = new ServiceScheduler(alarmManager, pendingIntentFactory,
+        ServiceScheduler serviceScheduler = new ServiceScheduler(context, pendingIntentFactory,
                 LoggerFactory.getLogger(ServiceScheduler.class));
 
         Intent intent = new Intent(context.getApplicationContext(), DatafileService.class);
         intent.putExtra(DatafileService.EXTRA_PROJECT_ID, projectId);
         serviceScheduler.schedule(intent, updateInterval * 1000);
+
+        storeInterval(context, updateInterval * 1000);
+    }
+
+    private static void storeInterval(Context context, long interval) {
+        OptlyStorage storage = new OptlyStorage(context);
+        storage.saveLong("DATAFILE_INTERVAL", interval);
+    }
+
+    public static long getUpdateInterval(Context context) {
+        OptlyStorage storage = new OptlyStorage(context);
+        return storage.getLong("DATAFILE_INTERVAL", -1);
     }
 
     /**
@@ -127,16 +134,16 @@ public class DefaultDatafileHandler implements DatafileHandler {
      * @param projectId project id of the datafile uploading
      */
     public void stopBackgroundUpdates(Context context, String projectId) {
-        AlarmManager alarmManager = (AlarmManager) context
-                .getSystemService(Context.ALARM_SERVICE);
         ServiceScheduler.PendingIntentFactory pendingIntentFactory = new ServiceScheduler
                 .PendingIntentFactory(context.getApplicationContext());
-        ServiceScheduler serviceScheduler = new ServiceScheduler(alarmManager, pendingIntentFactory,
+        ServiceScheduler serviceScheduler = new ServiceScheduler(context.getApplicationContext(), pendingIntentFactory,
                 LoggerFactory.getLogger(ServiceScheduler.class));
         Intent intent = new Intent(context.getApplicationContext(), DatafileService.class);
         serviceScheduler.unschedule(intent);
 
         clearBackgroundCache(context, projectId);
+
+        storeInterval(context, -1);
     }
 
     private void enableBackgroundCache(Context context, String projectId) {

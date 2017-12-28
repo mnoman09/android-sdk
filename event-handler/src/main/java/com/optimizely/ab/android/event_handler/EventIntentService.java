@@ -16,10 +16,11 @@
 
 package com.optimizely.ab.android.event_handler;
 
-import android.app.AlarmManager;
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 
@@ -43,6 +44,8 @@ public class EventIntentService extends IntentService {
     static final String EXTRA_URL = "com.optimizely.ab.android.EXTRA_URL";
     static final String EXTRA_REQUEST_BODY = "com.optimizely.ab.android.EXTRA_REQUEST_BODY";
     static final String EXTRA_INTERVAL = "com.optimizely.ab.android.EXTRA_INTERVAL";
+    public static final Integer JOB_ID = 2112;
+
     Logger logger = LoggerFactory.getLogger(EventIntentService.class);
     @Nullable EventDispatcher eventDispatcher;
 
@@ -64,7 +67,7 @@ public class EventIntentService extends IntentService {
                 LoggerFactory.getLogger(Client.class)), LoggerFactory.getLogger(EventClient.class));
         EventDAO eventDAO = EventDAO.getInstance(this, "1", LoggerFactory.getLogger(EventDAO.class));
         ServiceScheduler serviceScheduler = new ServiceScheduler(
-                (AlarmManager) getSystemService(ALARM_SERVICE),
+                this,
                 new ServiceScheduler.PendingIntentFactory(this),
                 LoggerFactory.getLogger(ServiceScheduler.class));
         eventDispatcher = new EventDispatcher(this, optlyStorage, eventDAO, eventClient, serviceScheduler, LoggerFactory.getLogger(EventDispatcher.class));
@@ -77,6 +80,7 @@ public class EventIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+
         if (intent == null) {
             logger.warn("Handled a null intent");
             return;
@@ -88,5 +92,6 @@ public class EventIntentService extends IntentService {
         } else {
             logger.warn("Unable to create dependencies needed by intent handler");
         }
+
     }
 }

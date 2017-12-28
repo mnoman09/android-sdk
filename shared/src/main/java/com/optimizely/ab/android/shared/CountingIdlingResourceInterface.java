@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
 /****************************************************************************
  * Copyright 2017, Optimizely, Inc. and contributors                        *
  *                                                                          *
@@ -15,17 +13,13 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  ***************************************************************************/
--->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.optimizely.ab.android.shared">
+package com.optimizely.ab.android.shared;
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-
-    <application>
-        <service android:name=".JobWorkService"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service android:name=".ScheduledJobService"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-    </application>
-</manifest>
+/**
+ * Interface for dealing with Espresso idling counter
+ */
+public interface CountingIdlingResourceInterface {
+    public void increment();
+    public void decrement();
+}
